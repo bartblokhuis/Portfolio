@@ -11,6 +11,8 @@ import { AboutMeComponent } from './components/about-me/about-me.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { RichTextEditorComponent } from './components/rich-text-editor/rich-text-editor.component';
+import { QuillModule } from 'ngx-quill'
 
 @NgModule({
   declarations: [
@@ -22,11 +24,14 @@ import { MessagesComponent } from './components/messages/messages.component';
     AboutMeComponent,
     SkillsComponent,
     ProjectsComponent,
-    MessagesComponent
+    MessagesComponent,
+    RichTextEditorComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    QuillModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent]
