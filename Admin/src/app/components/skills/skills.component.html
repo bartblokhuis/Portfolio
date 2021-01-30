@@ -17,7 +17,108 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Content starts here -->
+        <div class="row">
+          <div class="col-6">
+            <div class="card">
 
+              <div class="card-header">
+                <h3 class="card-title">Front end skills</h3>
+              </div>
+
+
+              <div class="card-body table-responsive p-0" style="height: 300px;">
+                <table class="table table-head-fixed text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Icon</th>
+                      <th>Display order</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let skill of frontEndSkills;">
+                      <td> {{ skill.name }} </td>
+                      <td> {{ skill.icon }} </td>
+                      <td> {{ skill.displayOrder }} </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Add skill</button>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="card">
+
+              <div class="card-header">
+                <h3 class="card-title">Back end skills</h3>
+              </div>
+
+
+              <div class="card-body table-responsive p-0" style="height: 300px;">
+                <table class="table table-head-fixed text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Icon</th>
+                      <th>Display order</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let skill of backEndSkills;">
+                      <td> {{ skill.name }} </td>
+                      <td> {{ skill.icon }} </td>
+                      <td> {{ skill.displayOrder }} </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Add skill</button>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="card">
+
+              <div class="card-header">
+                <h3 class="card-title">Other skills</h3>
+              </div>
+
+              <div class="card-body table-responsive p-0" style="height: 300px;">
+                <table class="table table-head-fixed text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Icon</th>
+                      <th>Display order</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let skill of otherSkills;">
+                      <td> {{ skill.name }} </td>
+                      <td> {{ skill.icon }} </td>
+                      <td> {{ skill.displayOrder }} </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Add skill</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
