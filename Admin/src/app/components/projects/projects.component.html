@@ -17,7 +17,59 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Content starts here -->
+        <div class="row">
 
+          <div class="col-12">
+            <div class="card">
+
+              <div class="card-header">
+                <h3 class="card-title">Projects</h3>
+              </div>
+
+
+              <div class="card-body table-responsive p-0" style="height: 300px;">
+                <table class="table table-head-fixed text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Description</th>
+                      <th>Image</th>
+                      <th>Demo</th>
+                      <th>Github</th>
+                      <th>Display order</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let project of projects;">
+                      <td> {{ project.title }} </td>
+                      <td [innerHtml]="project.description"></td>
+                      <td> {{ project.image }} </td>
+                      <td> <a *ngIf="project.demoUrl" [href]="project.demoUrl" target="_blank">{{ project.demoUrl }}</a> </td>
+                      <td> <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank">{{ project.githubUrl }}</a></td>
+                      <td> {{ project.displayOrder }} </td>
+                      <td> 
+                        <div class="actions">
+                          <div (click)="editProject()" class="action">
+                            <i class="fas fa-pen-alt"></i>
+                          </div>
+                          <div (click)="deleteProject()" class="action">
+                            <i class="fas fa-trash-alt danger"></i>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Add project</button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   </div>
