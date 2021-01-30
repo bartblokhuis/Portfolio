@@ -351,3 +351,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+.idea/.idea.Portfolio/.idea/contentModel.xml
+.idea/.idea.Portfolio/.idea/workspace.xml
