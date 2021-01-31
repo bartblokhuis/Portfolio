@@ -17,7 +17,57 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Content starts here -->
+        <div class="row">
 
+          <div class="col-12">
+            <div class="card">
+
+              <div class="card-header">
+                <h3 class="card-title">Messages</h3>
+              </div>
+
+
+              <div class="card-body table-responsive p-0" style="height: 300px;">
+                <table class="table table-head-fixed text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Firstname</th>
+                      <th>Lastname</th>
+                      <th>Emailaddress</th>
+                      <th>Message</th>
+                      <th>Status</th>
+                      <th>Received date</th>
+                      <th>Last updated date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let message of messages;">
+                      <td> {{ message.firstName }} </td>
+                      <td> {{ message.lastName }} </td>
+                      <td> {{ message.emailAddress }} </td>
+                      <td [innerHtml]="message.message"></td>
+                      <td> {{ message.status }} </td>
+                      <td> {{ message.receivedDate }} </td>
+                      <td> {{ message.lastUpdatedDate }} </td>
+                      <td> 
+                        <div class="actions">
+                          <div (click)="editProject()" class="action">
+                            <i class="fas fa-pen-alt"></i>
+                          </div>
+                          <div (click)="deleteProject()" class="action">
+                            <i class="fas fa-trash-alt danger"></i>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   </div>

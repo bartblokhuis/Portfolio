@@ -31,6 +31,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   editProject(): void {
+    
   }
 
   deleteProject(): void {

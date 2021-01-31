@@ -1,0 +1,42 @@
+.table-responsive {
+
+    td.number,
+    th.number,
+    td.actions,
+    th.actions {
+        text-align: center;
+    }
+
+    .action {
+        display: inline-block;
+        padding: 6px;
+        background-color: #f1f1f1;
+        border-radius: 50%;
+        height: 16px;
+        width: 16px;
+        box-sizing: content-box;
+        margin: 0 3px;
+        position: relative;
+
+        i{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(0,0,0,.5);
+        }
+
+        &:hover{
+            cursor: pointer;
+
+            i {
+                color: rgba(0,0,0,8);
+            }
+
+            i.danger{
+                color: #dc3545;
+            }
+            
+        }
+    }
+}

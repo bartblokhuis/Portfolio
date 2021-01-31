@@ -31,11 +31,12 @@
                 <table class="table table-head-fixed text-nowrap">
                   <thead>
                     <tr>
+                      <th>Title</th>
                       <th>Description</th>
                       <th>Image</th>
                       <th>Demo</th>
                       <th>Github</th>
-                      <th>Display order</th>
+                      <th class="number">Display order</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -46,7 +47,7 @@
                       <td> {{ project.image }} </td>
                       <td> <a *ngIf="project.demoUrl" [href]="project.demoUrl" target="_blank">{{ project.demoUrl }}</a> </td>
                       <td> <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank">{{ project.githubUrl }}</a></td>
-                      <td> {{ project.displayOrder }} </td>
+                      <td class="number"> {{ project.displayOrder }} </td>
                       <td> 
                         <div class="actions">
                           <div (click)="editProject()" class="action">
