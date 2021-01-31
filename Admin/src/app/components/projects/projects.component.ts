@@ -6,6 +6,7 @@ interface Project {
   description: string,
   image: string,
   displayOrder: number,
+  published: boolean,
   githubUrl? :string,
   demoUrl?: string,
 
@@ -19,10 +20,10 @@ interface Project {
 export class ProjectsComponent implements OnInit {
 
   projects: Project[] = [
-    {  title: "Ultimate reddit bot", description: "<p>Ultimate Rmework.</p>", image: "",  displayOrder: 0 },
-    {  title: "Ultimate localization", description: "", image: "", displayOrder: 1 },
-    {  title: "Martian weather", description: "", image: "", displayOrder: 3 },
-    {  title: "Clean download folder", description: "", image: "", displayOrder: 2 },
+    {  title: "Ultimate reddit bot", description: "<p>Ultimate Rmework.</p>", image: "",  displayOrder: 0, published: true },
+    {  title: "Ultimate localization", description: "", image: "", displayOrder: 1, published: false },
+    {  title: "Martian weather", description: "", image: "", displayOrder: 3, published: true },
+    {  title: "Clean download folder", description: "", image: "", displayOrder: 2, published: true },
   ].sort((a,b) => a.displayOrder - b.displayOrder)
 
   constructor() { }

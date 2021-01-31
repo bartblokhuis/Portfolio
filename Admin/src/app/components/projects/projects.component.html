@@ -33,7 +33,8 @@
                     <tr>
                       <th>Title</th>
                       <th>Description</th>
-                      <th>Image</th>
+                      <th>Image</th>       
+                      <th class="icon">Published</th>
                       <th>Demo</th>
                       <th>Github</th>
                       <th class="number">Display order</th>
@@ -45,6 +46,14 @@
                       <td> {{ project.title }} </td>
                       <td [innerHtml]="project.description"></td>
                       <td> {{ project.image }} </td>
+                      <td class="icon"> 
+                        <ng-container *ngIf="project.published; else unpublished">
+                          <i class="fas fa-check"></i>
+                        </ng-container>
+                        <ng-template #unpublished>
+                          <i class="fas fa-ban"></i> 
+                        </ng-template>
+                      </td>
                       <td> <a *ngIf="project.demoUrl" [href]="project.demoUrl" target="_blank">{{ project.demoUrl }}</a> </td>
                       <td> <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank">{{ project.githubUrl }}</a></td>
                       <td class="number"> {{ project.displayOrder }} </td>
