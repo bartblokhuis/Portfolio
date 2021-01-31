@@ -14,8 +14,8 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { RichTextEditorComponent } from './components/rich-text-editor/rich-text-editor.component';
 import { QuillModule } from 'ngx-quill';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CreateProjectComponent } from './Components/projects/create-project/create-project.component';
-import { EditProjectComponent } from './Components/projects/edit-project/edit-project.component';
+import { CreateProjectComponent } from './components/projects/create-project/create-project.component';
+import { EditProjectComponent } from './components/projects/edit-project/edit-project.component';
 import { FormsModule } from '@angular/forms';
 
 
