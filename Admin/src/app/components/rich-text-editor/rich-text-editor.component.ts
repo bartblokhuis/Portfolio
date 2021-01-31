@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-rich-text-editor',
   templateUrl: './rich-text-editor.component.html',
   styleUrls: ['./rich-text-editor.component.scss']
 })
-export class RichTextEditorComponent implements OnInit {
+export class RichTextEditorComponent {
 
-  constructor() { }
+  @Input() control: FormControl
+  @Input() content: string
 
-  ngOnInit(): void {
+  constructor() {
+    if(!this.content){
+      this.content = "";
+    }
   }
 
 }

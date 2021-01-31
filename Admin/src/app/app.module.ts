@@ -12,7 +12,12 @@ import { SkillsComponent } from './components/skills/skills.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { RichTextEditorComponent } from './components/rich-text-editor/rich-text-editor.component';
-import { QuillModule } from 'ngx-quill'
+import { QuillModule } from 'ngx-quill';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreateProjectComponent } from './Components/projects/create-project/create-project.component';
+import { EditProjectComponent } from './Components/projects/edit-project/edit-project.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -25,13 +30,16 @@ import { QuillModule } from 'ngx-quill'
     SkillsComponent,
     ProjectsComponent,
     MessagesComponent,
-    RichTextEditorComponent
+    RichTextEditorComponent,
+    CreateProjectComponent,
+    EditProjectComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    QuillModule.forRoot()
-
+    QuillModule.forRoot(),
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,11 @@
 <quill-editor 
-[placeholder]="''"
-[styles]="{'min-height': '120px'}"
-class="content-editor"
->
+name="editor" 
+[(ngModel)]="content" 
+[placeholder]="''" 
+#modelRef="ngModel"
+[required]="true"
+[maxLength]="10"
+class="text-editor">
+
+
 </quill-editor>

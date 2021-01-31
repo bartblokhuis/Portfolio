@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { CreateProjectComponent } from './create-project/create-project.component';
+import { Project } from './data/project';
+import { EditProjectComponent } from './edit-project/edit-project.component';
 
-interface Project {
 
-  title: string,
-  description: string,
-  image: string,
-  displayOrder: number,
-  published: boolean,
-  githubUrl? :string,
-  demoUrl?: string,
-
-}
 
 @Component({
   selector: 'app-projects',
@@ -20,22 +14,47 @@ interface Project {
 export class ProjectsComponent implements OnInit {
 
   projects: Project[] = [
-    {  title: "Ultimate reddit bot", description: "<p>Ultimate Rmework.</p>", image: "",  displayOrder: 0, published: true },
-    {  title: "Ultimate localization", description: "", image: "", displayOrder: 1, published: false },
-    {  title: "Martian weather", description: "", image: "", displayOrder: 3, published: true },
-    {  title: "Clean download folder", description: "", image: "", displayOrder: 2, published: true },
+    { id: 0, title: "Ultimate reddit bot", description: "<p>Ultimate Rmework.</p>", image: "",  displayOrder: 0, published: true },
+    { id: 1, title: "Ultimate localization", description: "", image: "", displayOrder: 1, published: false },
+    { id: 2, title: "Martian weather", description: "", image: "", displayOrder: 3, published: true },
+    { id: 3, title: "Clean download folder", description: "", image: "", displayOrder: 2, published: true },
   ].sort((a,b) => a.displayOrder - b.displayOrder)
 
-  constructor() { }
+  closeResult = '';
+
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
   }
 
-  editProject(): void {
-    
+  addProject() {
+    this.modalService.open(CreateProjectComponent, { size: 'lg' })
+  }
+
+  editProject(project: Project) {
+    const modalRef = this.modalService.open(EditProjectComponent, { size: 'lg' })
+    modalRef.componentInstance.project = project;
+
+    // this.modalService.open(content, {size: 'lg'}).result.then((result) => {
+    //   this.closeResult = `Closed with: ${result}`;
+    // }, (reason) => {
+    //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    // });
   }
 
   deleteProject(): void {
+  }
+
+  
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 }
