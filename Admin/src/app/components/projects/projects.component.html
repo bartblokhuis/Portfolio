@@ -62,7 +62,7 @@
                           <div (click)="editProject(project)" class="action">
                             <i class="fas fa-pen-alt"></i>
                           </div>
-                          <div (click)="deleteProject()" class="action">
+                          <div (click)="deleteProject(project)" class="action">
                             <i class="fas fa-trash-alt danger"></i>
                           </div>
                         </div>
@@ -83,66 +83,3 @@
       </div>
     </section>
   </div>
-
-  <ng-template #newProjectTemplate let-modal>
-  </ng-template>
-
-
-  <ng-template #editProjectTemplate let-modal>
-
-    
-  </ng-template>
-  
-
-  <ng-template #projectModalBase>
-    
-    <div class="form-group">
-      <label>Title</label>
-      <input class="form-control" type="text" />
-    </div>
-
-    <div class="form-group">
-      <label>Description</label>
-      <app-rich-text-editor></app-rich-text-editor>
-    </div>
-
-    <div class="row">
-      <div class="col-6">
-        <div class="form-group">
-          <label>Demo image</label>
-          <div class="custom-file">
-            
-            <input type="file" class="form-control" id="customFile" />
-            <label class="custom-file-label" for="customFile">Choose file</label>
-          </div>
-        </div>
-        
-      </div>
-      <div class="col-6">
-        <div class="form-group">
-          <label>Demo</label>
-          <input class="form-control" type="text" />
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="form-group">
-          <label>Github</label>
-          <input class="form-control" type="text" />
-        </div>
-      </div>
-
-      <div class="col-6">
-        <div class="form-group">
-          <label>Display order</label>
-          <input class="form-control" type="number"/>
-        </div>
-      </div>
-
-      <div class="col-6">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" />
-          <label class="form-check-label" for="exampleCheck1">Published</label>
-        </div>
-      </div>
-    </div>
-  </ng-template>

@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateProjectComponent } from './components/projects/create-project/create-project.component';
 import { EditProjectComponent } from './components/projects/edit-project/edit-project.component';
 import { FormsModule } from '@angular/forms';
+import { DeleteProjectComponent } from './components/projects/delete-project/delete-project.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { FormsModule } from '@angular/forms';
     MessagesComponent,
     RichTextEditorComponent,
     CreateProjectComponent,
-    EditProjectComponent
+    EditProjectComponent,
+    DeleteProjectComponent
   ],
   imports: [
     BrowserModule,

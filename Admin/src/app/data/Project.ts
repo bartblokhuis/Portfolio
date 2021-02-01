@@ -1,5 +1,6 @@
-export interface Project {
-    id: number,
+import { BaseEntity } from './BaseEntity';
+
+export interface Project extends BaseEntity {
     title: string,
     description: string,
     image: string,

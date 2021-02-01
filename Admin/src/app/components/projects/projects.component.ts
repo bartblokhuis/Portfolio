@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { CreateProjectComponent } from './create-project/create-project.component';
-import { Project } from './data/project';
+import { Project } from '../../data/project';
+import { DeleteProjectComponent } from './delete-project/delete-project.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 
 
@@ -42,7 +43,9 @@ export class ProjectsComponent implements OnInit {
     // });
   }
 
-  deleteProject(): void {
+  deleteProject(project: Project): void {
+    const modalRef = this.modalService.open(DeleteProjectComponent, { size: 'lg' })
+    modalRef.componentInstance.project = project;
   }
 
   
