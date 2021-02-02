@@ -25,14 +25,11 @@
               <div class="card-header">
                 <h3 class="card-title">Messages</h3>
               </div>
-
-
               <div class="card-body table-responsive p-0" style="height: 300px;">
                 <table class="table table-head-fixed text-nowrap">
                   <thead>
                     <tr>
-                      <th>Firstname</th>
-                      <th>Lastname</th>
+                      <th>Name</th>
                       <th>Emailaddress</th>
                       <th>Message</th>
                       <th>Status</th>
@@ -43,11 +40,23 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let message of messages;">
-                      <td> {{ message.firstName }} </td>
-                      <td> {{ message.lastName }} </td>
+                      <td> {{ message.firstName }} {{ message.lastName }} </td>
                       <td> {{ message.emailAddress }} </td>
                       <td [innerHtml]="message.message"></td>
-                      <td> {{ message.status }} </td>
+                      <td> 
+                        <ng-template [ngIf]="message.status == 0">
+                          <span class="badge bg-danger">Unread</span>
+                        </ng-template>
+                        <ng-template [ngIf]="message.status == 1">
+                          <span class="badge bg-warning">Read</span>
+                        </ng-template>
+                        <ng-template [ngIf]="message.status == 2">
+                          <span class="badge bg-primary">Awaiting response</span>
+                        </ng-template>
+                        <ng-template [ngIf]="message.status == 3">
+                          <span class="badge bg-success">Closed</span>
+                        </ng-template>
+                      </td>
                       <td> {{ message.receivedDate }} </td>
                       <td> {{ message.lastUpdatedDate }} </td>
                       <td> 
