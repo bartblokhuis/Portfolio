@@ -1,0 +1,62 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-project-title">Edit message</h4>
+    <button type="button" class="close" aria-label="Close" >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Status</label>
+                    <select class="custom-select" required>
+                        <!--<option selected></option>-->
+                        <option *ngFor="let messageType of messageTypes">{{ messageTypes[messageType] }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Firstname</label>
+                    <input class="form-control" type="text" [value]="message.firstName" readonly="readonly" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Lastname</label>
+                    <input class="form-control" type="text" [value]="message.lastName" readonly="readonly" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Emailaddress</label>
+                    <input class="form-control" type="text" [value]="message.emailAddress" readonly="readonly" />
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea class="form-control" type="text" [value]="message.message" readonly="readonly"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Received date</label>
+                    <input class="form-control" type="text" [value]="message.receivedDate" readonly="readonly" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Last updated date</label>
+                    <input class="form-control" type="text" [value]="message.lastUpdatedDate" readonly="readonly" />
+                </div>
+            </div>
+        </div>
+        
+        
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary">Save</button>
+  </div>

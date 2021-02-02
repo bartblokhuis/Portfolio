@@ -18,6 +18,8 @@ import { CreateProjectComponent } from './components/projects/create-project/cre
 import { EditProjectComponent } from './components/projects/edit-project/edit-project.component';
 import { FormsModule } from '@angular/forms';
 import { DeleteProjectComponent } from './components/projects/delete-project/delete-project.component';
+import { EditMessageComponent } from './components/messages/edit-message/edit-message.component';
+import { DeleteMessageComponent } from './components/messages/delete-message/delete-message.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { DeleteProjectComponent } from './components/projects/delete-project/del
     RichTextEditorComponent,
     CreateProjectComponent,
     EditProjectComponent,
-    DeleteProjectComponent
+    DeleteProjectComponent,
+    EditMessageComponent,
+    DeleteMessageComponent
   ],
   imports: [
     BrowserModule,

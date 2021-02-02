@@ -52,10 +52,10 @@
                       <td> {{ message.lastUpdatedDate }} </td>
                       <td> 
                         <div class="actions">
-                          <div (click)="editProject()" class="action">
+                          <div (click)="editMessage(message)" class="action">
                             <i class="fas fa-pen-alt"></i>
                           </div>
-                          <div (click)="deleteProject()" class="action">
+                          <div (click)="deleteMessage(message)" class="action">
                             <i class="fas fa-trash-alt danger"></i>
                           </div>
                         </div>
