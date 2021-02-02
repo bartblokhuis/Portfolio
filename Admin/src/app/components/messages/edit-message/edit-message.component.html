@@ -12,7 +12,7 @@
                     <label>Status</label>
                     <select class="custom-select" required>
                         <!--<option selected></option>-->
-                        <option *ngFor="let messageType of messageTypes">{{ messageTypes[messageType] }}</option>
+                        <option [selected]="message.status == messageType" *ngFor="let messageType of messageTypes">{{ mapping[messageType] }}</option>
                     </select>
                 </div>
             </div>

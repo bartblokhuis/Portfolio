@@ -14,8 +14,10 @@ export class EditMessageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    // console.log(this.mapping);
   }
 
+  mapping = MessageStatusToLabelMapping;
   messageTypes = [MessageStatus.Closed, MessageStatus.Read, MessageStatus.Unread, MessageStatus.WaitingResponse];
 
 }
