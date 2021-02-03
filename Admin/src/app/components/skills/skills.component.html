@@ -32,14 +32,25 @@
                     <tr>
                       <th>Name</th>
                       <th>Icon</th>
-                      <th>Display order</th>
+                      <th class="number">Display order</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let skill of frontEndSkills;">
                       <td> {{ skill.name }} </td>
                       <td> {{ skill.icon }} </td>
-                      <td> {{ skill.displayOrder }} </td>
+                      <td class="number"> {{ skill.displayOrder }} </td>
+                      <td> 
+                        <div class="actions">
+                          <div (click)="editSkill(skill)" class="action">
+                            <i class="fas fa-pen-alt"></i>
+                          </div>
+                          <div (click)="removeSkill(skill)" class="action">
+                            <i class="fas fa-trash-alt danger"></i>
+                          </div>
+                        </div>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -66,14 +77,25 @@
                     <tr>
                       <th>Name</th>
                       <th>Icon</th>
-                      <th>Display order</th>
+                      <th class="number">Display order</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let skill of backEndSkills;">
                       <td> {{ skill.name }} </td>
                       <td> {{ skill.icon }} </td>
-                      <td> {{ skill.displayOrder }} </td>
+                      <td class="number"> {{ skill.displayOrder }} </td>
+                      <td> 
+                        <div class="actions">
+                          <div (click)="editSkill(skill)" class="action">
+                            <i class="fas fa-pen-alt"></i>
+                          </div>
+                          <div (click)="removeSkill(skill)" class="action">
+                            <i class="fas fa-trash-alt danger"></i>
+                          </div>
+                        </div>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -99,14 +121,25 @@
                     <tr>
                       <th>Name</th>
                       <th>Icon</th>
-                      <th>Display order</th>
+                      <th class="number">Display order</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let skill of otherSkills;">
                       <td> {{ skill.name }} </td>
                       <td> {{ skill.icon }} </td>
-                      <td> {{ skill.displayOrder }} </td>
+                      <td class="number"> {{ skill.displayOrder }} </td>
+                      <td> 
+                        <div class="actions">
+                          <div (click)="editSkill(skill)" class="action">
+                            <i class="fas fa-pen-alt"></i>
+                          </div>
+                          <div (click)="removeSkill(skill)" class="action">
+                            <i class="fas fa-trash-alt danger"></i>
+                          </div>
+                        </div>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
