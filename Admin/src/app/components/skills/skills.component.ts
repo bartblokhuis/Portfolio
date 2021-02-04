@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Skill, SkillType} from '../../data/Skill';
 import { CreateSkillComponent } from './create-skill/create-skill.component';
+import { EditSkillComponent } from './edit-skill/edit-skill.component';
 
 
 @Component({
@@ -40,9 +41,13 @@ export class SkillsComponent implements OnInit {
   }
 
   addSkill(skillType: SkillType){
-    console.log(skillType);
     const modalRef = this.modalService.open(CreateSkillComponent, { size: 'lg' })
     modalRef.componentInstance.skillType = skillType;
+  }
+
+  editSkill(skill: Skill){
+    const modalRef = this.modalService.open(EditSkillComponent, { size: 'lg' })
+    modalRef.componentInstance.skill = skill;
   }
 
   
