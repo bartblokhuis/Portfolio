@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { DeleteProjectComponent } from './components/projects/delete-project/delete-project.component';
 import { EditMessageComponent } from './components/messages/edit-message/edit-message.component';
 import { DeleteMessageComponent } from './components/messages/delete-message/delete-message.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { DeleteMessageComponent } from './components/messages/delete-message/del
     AppRoutingModule,
     QuillModule.forRoot(),
     NgbModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

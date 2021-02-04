@@ -37,16 +37,15 @@
                       <th class="icon">Published</th>
                       <th>Demo</th>
                       <th>Github</th>
-                      <th class="number">Display order</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr *ngFor="let project of projects;">
-                      <td> {{ project.title }} </td>
-                      <td [innerHtml]="project.description"></td>
-                      <td> {{ project.image }} </td>
-                      <td class="icon"> 
+                  <tbody cdkDropList (cdkDropListDropped)="drop($event)">
+                    <tr *ngFor="let project of projects;" cdkDrag>
+                      <td class="col-md"> {{ project.title }} </td>
+                      <td class="col-md" [innerHtml]="project.description"></td>
+                      <td class="col-md"> {{ project.image }} </td>
+                      <td class="icon col-md"> 
                         <ng-container *ngIf="project.published; else unpublished">
                           <i class="fas fa-check"></i>
                         </ng-container>
@@ -54,11 +53,13 @@
                           <i class="fas fa-ban"></i> 
                         </ng-template>
                       </td>
-                      <td> <a *ngIf="project.demoUrl" [href]="project.demoUrl" target="_blank">{{ project.demoUrl }}</a> </td>
-                      <td> <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank">{{ project.githubUrl }}</a></td>
-                      <td class="number"> {{ project.displayOrder }} </td>
-                      <td> 
+                      <td class="col-md"> <a *ngIf="project.demoUrl" [href]="project.demoUrl" target="_blank">{{ project.demoUrl }}</a> </td>
+                      <td class="col-md"> <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank">{{ project.githubUrl }}</a></td>
+                      <td class="col-md"> 
                         <div class="actions">
+                          <div class="action" cdkDragHandle>
+                            <i class="fas fa-bars"></i>
+                          </div>
                           <div (click)="editProject(project)" class="action">
                             <i class="fas fa-pen-alt"></i>
                           </div>

@@ -4,6 +4,7 @@ import { CreateProjectComponent } from './create-project/create-project.componen
 import { Project } from '../../data/project';
 import { DeleteProjectComponent } from './delete-project/delete-project.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
 
 
@@ -48,6 +49,35 @@ export class ProjectsComponent implements OnInit {
     modalRef.componentInstance.project = project;
   }
 
+  drop(event: CdkDragDrop<Project[]>) {
+
+    var startIndex = event.previousIndex;
+    var endIndex = event.currentIndex;
+
+    //Set the start and end index based on wether the project is moving up or down.
+    if(event.previousIndex > event.currentIndex){
+      startIndex = event.currentIndex;
+      endIndex = event.previousIndex;
+    }
+
+    for (let i = startIndex; i <= endIndex; i++){
+      var project = this.projects[i];
+
+      if(i === event.previousIndex){
+        project.displayOrder = event.currentIndex;
+      }
+      
+      else if(event.previousIndex > event.currentIndex) {
+        project.displayOrder++;
+      }
+
+      else{
+        project.displayOrder--;
+      }
+    }
+    
+    this.projects.sort((a,b) => a.displayOrder - b.displayOrder);
+  }
   
 
   private getDismissReason(reason: any): string {
