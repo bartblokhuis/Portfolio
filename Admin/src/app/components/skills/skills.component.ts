@@ -1,17 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Skill, SkillType} from '../../data/Skill';
+import { CreateSkillComponent } from './create-skill/create-skill.component';
 
-enum SkillType {
- FrontEnd,
- BackEnd,
- Other
-}
-
-interface skill {
-  name: string,
-  icon: string,
-  type: SkillType,
-  displayOrder: number
-}
 
 @Component({
   selector: 'app-skills',
@@ -20,19 +11,39 @@ interface skill {
 })
 export class SkillsComponent implements OnInit {
 
-  skills: skill[] = [ 
+  skills: Skill[] = [ 
     { name: "Angular", icon: "test", displayOrder: 1, type: SkillType.FrontEnd },
     { name: "CSS", icon: "test", displayOrder: 0, type: SkillType.FrontEnd },
     { name: "C#", icon: "test", displayOrder: 1, type: SkillType.BackEnd },
     { name: "Nopcommerce", icon: "test", displayOrder: 1, type: SkillType.Other },
 ].sort((a,b) => a.displayOrder - b.displayOrder)
 
-  frontEndSkills: skill[] = this.skills.filter(skill => skill.type === SkillType.FrontEnd);
-  backEndSkills: skill[] = this.skills.filter(skill => skill.type === SkillType.BackEnd);
-  otherSkills: skill[] = this.skills.filter(skill => skill.type === SkillType.Other);
-  constructor() { }
+  frontEndSkills: Skill[] = this.skills.filter(skill => skill.type === SkillType.FrontEnd);
+  backEndSkills: Skill[] = this.skills.filter(skill => skill.type === SkillType.BackEnd);
+  otherSkills: Skill[] = this.skills.filter(skill => skill.type === SkillType.Other);
+  
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
   }
 
+  addFrontEndSkill(){
+    this.addSkill(SkillType.FrontEnd)
+  }
+
+  addBackEndSkill(){
+    this.addSkill(SkillType.BackEnd);
+  }
+
+  addOtherSkill(){
+    this.addSkill(SkillType.Other);
+  }
+
+  addSkill(skillType: SkillType){
+    console.log(skillType);
+    const modalRef = this.modalService.open(CreateSkillComponent, { size: 'lg' })
+    modalRef.componentInstance.skillType = skillType;
+  }
+
+  
 }
