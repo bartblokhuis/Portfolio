@@ -18,13 +18,12 @@
       <div class="container-fluid">
         <!-- Content starts here -->
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card">
 
               <div class="card-header">
                 <h3 class="card-title">Front end skills</h3>
               </div>
-
 
               <div class="card-body table-responsive p-0" style="height: 300px;">
                 <table class="table table-head-fixed text-nowrap">
@@ -32,17 +31,18 @@
                     <tr>
                       <th>Name</th>
                       <th>Icon</th>
-                      <th class="number">Display order</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr *ngFor="let skill of frontEndSkills;">
+                  <tbody cdkDropList (cdkDropListDropped)="dropFrontEndSkills($event)">
+                    <tr *ngFor="let skill of frontEndSkills;" cdkDrag>
                       <td> {{ skill.name }} </td>
                       <td> {{ skill.icon }} </td>
-                      <td class="number"> {{ skill.displayOrder }} </td>
                       <td> 
                         <div class="actions">
+                          <div class="action" cdkDragHandle>
+                            <i class="fas fa-bars"></i>
+                          </div>
                           <div (click)="editSkill(skill)" class="action">
                             <i class="fas fa-pen-alt"></i>
                           </div>
@@ -63,7 +63,7 @@
             </div>
           </div>
 
-          <div class="col-6">
+          <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card">
 
               <div class="card-header">
@@ -77,17 +77,18 @@
                     <tr>
                       <th>Name</th>
                       <th>Icon</th>
-                      <th class="number">Display order</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr *ngFor="let skill of backEndSkills;">
+                  <tbody cdkDropList (cdkDropListDropped)="dropBackEndSkills($event)">
+                    <tr *ngFor="let skill of backEndSkills;" cdkDrag>
                       <td> {{ skill.name }} </td>
                       <td> {{ skill.icon }} </td>
-                      <td class="number"> {{ skill.displayOrder }} </td>
                       <td> 
                         <div class="actions">
+                          <div class="action" cdkDragHandle>
+                            <i class="fas fa-bars"></i>
+                          </div>
                           <div (click)="editSkill(skill)" class="action">
                             <i class="fas fa-pen-alt"></i>
                           </div>
@@ -108,7 +109,7 @@
             </div>
           </div>
 
-          <div class="col-6">
+          <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card">
 
               <div class="card-header">
@@ -121,17 +122,18 @@
                     <tr>
                       <th>Name</th>
                       <th>Icon</th>
-                      <th class="number">Display order</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr *ngFor="let skill of otherSkills;">
+                  <tbody  cdkDropList (cdkDropListDropped)="dropOtherSkills($event)">
+                    <tr *ngFor="let skill of otherSkills;" cdkDrag>
                       <td> {{ skill.name }} </td>
                       <td> {{ skill.icon }} </td>
-                      <td class="number"> {{ skill.displayOrder }} </td>
                       <td> 
                         <div class="actions">
+                          <div class="action" cdkDragHandle>
+                            <i class="fas fa-bars"></i>
+                          </div>
                           <div (click)="editSkill(skill)" class="action">
                             <i class="fas fa-pen-alt"></i>
                           </div>
