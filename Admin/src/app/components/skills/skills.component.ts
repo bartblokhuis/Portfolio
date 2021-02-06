@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Skill, SkillType} from '../../data/Skill';
 import { CreateSkillComponent } from './create-skill/create-skill.component';
+import { DeleteSkillComponent } from './delete-skill/delete-skill.component';
 import { EditSkillComponent } from './edit-skill/edit-skill.component';
 
 
@@ -47,6 +48,11 @@ export class SkillsComponent implements OnInit {
 
   editSkill(skill: Skill){
     const modalRef = this.modalService.open(EditSkillComponent, { size: 'lg' })
+    modalRef.componentInstance.skill = skill;
+  }
+
+  removeSkill(skill: Skill) {
+    const modalRef = this.modalService.open(DeleteSkillComponent, { size: 'lg' })
     modalRef.componentInstance.skill = skill;
   }
 

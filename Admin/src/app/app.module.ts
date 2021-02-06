@@ -23,6 +23,7 @@ import { DeleteMessageComponent } from './components/messages/delete-message/del
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CreateSkillComponent } from './components/skills/create-skill/create-skill.component';
 import { EditSkillComponent } from './components/skills/edit-skill/edit-skill.component';
+import { DeleteSkillComponent } from './components/skills/delete-skill/delete-skill.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { EditSkillComponent } from './components/skills/edit-skill/edit-skill.co
     EditMessageComponent,
     DeleteMessageComponent,
     CreateSkillComponent,
-    EditSkillComponent
+    EditSkillComponent,
+    DeleteSkillComponent
   ],
   imports: [
     BrowserModule,

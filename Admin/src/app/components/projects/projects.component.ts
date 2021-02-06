@@ -36,12 +36,6 @@ export class ProjectsComponent implements OnInit {
   editProject(project: Project) {
     const modalRef = this.modalService.open(EditProjectComponent, { size: 'lg' })
     modalRef.componentInstance.project = project;
-
-    // this.modalService.open(content, {size: 'lg'}).result.then((result) => {
-    //   this.closeResult = `Closed with: ${result}`;
-    // }, (reason) => {
-    //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    // });
   }
 
   deleteProject(project: Project): void {
@@ -66,7 +60,7 @@ export class ProjectsComponent implements OnInit {
       if(i === event.previousIndex){
         project.displayOrder = event.currentIndex;
       }
-      
+
       else if(event.previousIndex > event.currentIndex) {
         project.displayOrder++;
       }

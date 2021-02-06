@@ -8,7 +8,7 @@ import { SkillType } from 'src/app/data/Skill';
 })
 export class CreateSkillComponent implements OnInit {
 
-  @Input() project: SkillType;
+  @Input() skillType: SkillType;
 
   constructor() { }
 
