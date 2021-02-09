@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Database", "Portf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Domain", "Portfolio.Domain\Portfolio.Domain.csproj", "{35098228-178F-4CBB-A292-CC2B1FC569AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Migrations", "Portfolio.Migrations\Portfolio.Migrations.csproj", "{E54EEBEC-6B67-4243-B0A3-7586C3D1E45A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Migrations", "Portfolio.Migrations\Portfolio.Migrations.csproj", "{A78EF4FE-72C4-41F5-B8FA-AB7F77669304}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,9 +32,9 @@ Global
 		{35098228-178F-4CBB-A292-CC2B1FC569AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35098228-178F-4CBB-A292-CC2B1FC569AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35098228-178F-4CBB-A292-CC2B1FC569AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E54EEBEC-6B67-4243-B0A3-7586C3D1E45A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E54EEBEC-6B67-4243-B0A3-7586C3D1E45A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E54EEBEC-6B67-4243-B0A3-7586C3D1E45A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E54EEBEC-6B67-4243-B0A3-7586C3D1E45A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A78EF4FE-72C4-41F5-B8FA-AB7F77669304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A78EF4FE-72C4-41F5-B8FA-AB7F77669304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A78EF4FE-72C4-41F5-B8FA-AB7F77669304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A78EF4FE-72C4-41F5-B8FA-AB7F77669304}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
