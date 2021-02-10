@@ -14,6 +14,8 @@ namespace Portfolio.Domain.Models
 
         public int SkillGroupId { get; set; }
 
+        public SkillGroup SkillGroup { get; set; }
+
         #endregion
     }
 }

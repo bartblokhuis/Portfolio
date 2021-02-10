@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionString": {
+    "DefaultConnection": "Data Source=localhost;Initial Catalog=Portfolio;Integrated Security=True;Persist Security Info=False"
+  }
+}
