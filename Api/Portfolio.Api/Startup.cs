@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Portfolio.Core.Interfaces.Common;
 using Portfolio.Core.Services.Common;
+using Portfolio.Database;
 
 namespace Portfolio
 {
@@ -34,6 +36,12 @@ namespace Portfolio
             services.AddScoped(typeof(IBaseRepository<,,>), typeof(BaseRepository<,,>));
             services.AddScoped(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+            services.AddDbContext<PortfolioContext>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionString:DiscordConnection"]);
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
