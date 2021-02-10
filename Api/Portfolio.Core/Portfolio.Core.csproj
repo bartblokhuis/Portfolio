@@ -8,4 +8,9 @@
       <ProjectReference Include="..\Portfolio.Database\Portfolio.Database.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="10.1.1" />
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    </ItemGroup>
+
 </Project>

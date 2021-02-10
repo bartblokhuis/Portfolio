@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Portfolio.Core.AutoMapper;
 using Portfolio.Core.Interfaces.Common;
 using Portfolio.Core.Services.Common;
 using Portfolio.Database;
@@ -42,6 +43,7 @@ namespace Portfolio
                 options.UseSqlServer(Configuration["ConnectionString:DiscordConnection"]);
             });
 
+            services.AddAutoMapper(typeof(PortfolioMappings));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
