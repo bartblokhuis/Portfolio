@@ -1,9 +1,8 @@
-﻿using System;
-using Portfolio.Domain.Models.Common;
+﻿using Portfolio.Domain.Models.Common;
 
 namespace Portfolio.Domain.Models
 {
-    public class Projects : BaseEntity, IHasDisplayNumber
+    public class Project : BaseEntity, IHasDisplayNumber
     {
         #region Properties
 

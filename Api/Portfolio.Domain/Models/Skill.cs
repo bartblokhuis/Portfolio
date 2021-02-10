@@ -2,7 +2,7 @@
 
 namespace Portfolio.Domain.Models
 {
-    public class Skills : BaseEntity, IHasDisplayNumber
+    public class Skill : BaseEntity, IHasDisplayNumber
     {
         #region Properties
 

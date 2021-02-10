@@ -4,7 +4,7 @@ using Portfolio.Domain.Models.Common;
 
 namespace Portfolio.Domain.Models
 {
-    public class Messages : BaseEntity, IFullyAudited
+    public class Message : BaseEntity, IFullyAudited
     {
         #region Properties
 
@@ -12,7 +12,7 @@ namespace Portfolio.Domain.Models
 
         public string LastName { get; set; }
 
-        public string Message { get; set; }
+        public string Content { get; set; }
 
         public MessageStatus MessageStatus { get; set; }
 
