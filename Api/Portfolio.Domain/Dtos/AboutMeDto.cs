@@ -1,8 +1,8 @@
-﻿using Portfolio.Domain.Models.Common;
+﻿using Portfolio.Domain.Dtos.Common;
 
-namespace Portfolio.Domain.Models
+namespace Portfolio.Domain.Dtos
 {
-    public class AboutMe : BaseEntity
+    public class AboutMeDto : IBaseDto
     {
         #region Properties
 
