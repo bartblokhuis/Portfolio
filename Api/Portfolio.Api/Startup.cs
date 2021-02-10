@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Portfolio.Core.Interfaces.Common;
+using Portfolio.Core.Services.Common;
 
 namespace Portfolio
 {
@@ -28,6 +30,10 @@ namespace Portfolio
         {
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Portfolio.Api", Version = "v1"}); });
+
+            services.AddScoped(typeof(IBaseRepository<,,>), typeof(BaseRepository<,,>));
+            services.AddScoped(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
