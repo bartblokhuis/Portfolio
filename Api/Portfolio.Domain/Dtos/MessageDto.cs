@@ -4,7 +4,7 @@ using Portfolio.Domain.Enums;
 
 namespace Portfolio.Domain.Dtos
 {
-    public class MessageDto : IBaseDto
+    public class MessageDto : BaseDto
     {
         #region Properties
 

@@ -8,44 +8,44 @@ using Portfolio.Database;
 
 namespace Portfolio.Core.Interfaces.Common
 {
-    public interface IBaseRepository<TEntity> : IBaseRepository<TEntity, int>
+    public interface IBaseRepository<TEntity, TEntityDto> : IBaseRepository<TEntity, TEntityDto, int>
         where TEntity : class
     {
 
     }
 
-    public interface IBaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey, PortfolioContext>
+    public interface IBaseRepository<TEntity, TEntityDto, TKey> : IBaseRepository<TEntity, TEntityDto, TKey, PortfolioContext>
         where TEntity : class
     {
 
     }
 
-    public interface IBaseRepository<TEntity, TKey, TDbContext>
+    public interface IBaseRepository<TEntity, TEntityDto, TKey, TDbContext>
         where TEntity : class
     {
         public DbSet<TEntity> Table { get; }
 
-        Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null,
+        Task<IEnumerable<TEntityDto>> GetAsync(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "");
 
-        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<IEnumerable<TEntityDto>> GetAllAsync();
 
-        Task InsertAsync(TEntity entity);
+        Task InsertAsync(TEntityDto entity);
 
-        Task InsertAsync(IEnumerable<TEntity> entity);
+        Task InsertAsync(IEnumerable<TEntityDto> entity);
 
-        Task UpdateAsync(TEntity entity);
+        Task UpdateAsync(TEntityDto entity);
 
-        Task UpdateRangeAsync(IEnumerable<TEntity> entities);
+        Task UpdateRangeAsync(IEnumerable<TEntityDto> entities);
 
-        Task DeleteAsync(TEntity entity);
+        Task DeleteAsync(TEntityDto entity);
 
-        Task DeleteAsync(IEnumerable<TEntity> entities);
+        Task DeleteAsync(IEnumerable<TEntityDto> entities);
 
         Task DeleteAsync(TKey id);
 
-        Task<TEntity> GetByIdAsync(TKey id);
+        Task<TEntityDto> GetByIdAsync(TKey id);
 
         int Count();
     }

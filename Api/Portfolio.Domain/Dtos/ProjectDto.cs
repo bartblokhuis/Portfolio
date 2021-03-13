@@ -2,7 +2,7 @@
 
 namespace Portfolio.Domain.Dtos
 {
-    public class ProjectDto : IBaseDto
+    public class ProjectDto : BaseDto
     {
         #region Properties
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Portfolio.Core.Interfaces.Common;
 using Portfolio.Database;
@@ -10,41 +11,62 @@ using Portfolio.Domain.Models.Common;
 
 namespace Portfolio.Core.Services.Common
 {
-    public class BaseRepository<TEntity> : BaseRepository<TEntity, int>, IBaseRepository<TEntity>
+    public class BaseRepository<TEntity, TDtoEntity> : BaseRepository<TEntity, TDtoEntity, int>, IBaseRepository<TEntity, TDtoEntity>
         where TEntity : class, IBaseEntity<int>
     {
-        public BaseRepository(PortfolioContext context)
-            : base(context)
+        public BaseRepository(PortfolioContext context, IMapper mapper)
+            : base(context, mapper)
         {
         }
     }
 
-    public class BaseRepository<TEntity, TKey> : BaseRepository<TEntity, TKey, PortfolioContext>, IBaseRepository<TEntity, TKey>
+    public class BaseRepository<TEntity, TDtoEntity, TKey> : BaseRepository<TEntity, TDtoEntity, TKey, PortfolioContext>, IBaseRepository<TEntity, TDtoEntity, TKey>
         where TEntity : class, IBaseEntity<TKey>
     {
-        public BaseRepository(PortfolioContext context)
-            : base(context)
+        public BaseRepository(PortfolioContext context, IMapper mapper)
+            : base(context, mapper)
         {
         }
     }
 
-    public class BaseRepository<TEntity, TKey, TDbContext> : IBaseRepository<TEntity, TKey, TDbContext>
+    public class BaseRepository<TEntity, TDtoEntity, TKey, TDbContext> : IBaseRepository<TEntity, TDtoEntity, TKey, TDbContext>
         where TDbContext : DbContext
         where TEntity : class, IBaseEntity<TKey>
     {
+        #region Fields
+
         private readonly DbContext _context;
         private readonly DbSet<TEntity> _dbSet;
+        private readonly IMapper _mapper;
+        
+        #endregion
 
-        public BaseRepository(TDbContext context)
+        #region Constructor
+
+        public BaseRepository(TDbContext context, IMapper mapper)
         {
             _context = context;
             _dbSet = context.Set<TEntity>();
+            _mapper = mapper;
             Table = _dbSet;
         }
 
+        #endregion
+
+        #region Methods
+
+        #region Get
+
         public DbSet<TEntity> Table { get; }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAsync(
+        public virtual async Task<TDtoEntity> GetByIdAsync(TKey id)
+        {
+            var entity = await _dbSet.FindAsync(id);
+
+            return entity == null ? default : _mapper.Map<TDtoEntity>(entity);
+        }
+
+        public virtual async Task<IEnumerable<TDtoEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
@@ -58,28 +80,45 @@ namespace Portfolio.Core.Services.Common
                 query = includeProperties.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
             if (orderBy != null)
-                return orderBy(query).ToList();
+            {
+                var orderByResult = orderBy(query).ToList();
 
-            return await query.ToListAsync().ConfigureAwait(false);
+                return orderByResult == null ? default : _mapper.Map<IEnumerable<TDtoEntity>>(orderByResult);
+            }
+
+            var result = await query.ToListAsync().ConfigureAwait(false);
+            return result == null ? default : _mapper.Map<IEnumerable<TDtoEntity>>(result);
         }
 
-        public virtual async Task<TEntity> GetByIdAsync(TKey id)
+        public virtual Task<IEnumerable<TDtoEntity>> GetAllAsync()
         {
-            var entity = await _dbSet.FindAsync(id);
-            return entity;
+            IQueryable<TEntity> query = _dbSet;
+            var result = query.AsNoTracking().ToListAsync();
+
+            return _mapper.Map<Task<IEnumerable<TDtoEntity>>>(result);
         }
 
-        public async Task InsertAsync(TEntity entity)
+        #endregion
+
+        #region Create
+
+        public async Task InsertAsync(TDtoEntity dtoEntity)
         {
+            var entity = _mapper.Map<TEntity>(dtoEntity);
             await _dbSet.AddAsync(entity);
             await SaveChanges();
         }
 
-        public virtual async Task InsertAsync(IEnumerable<TEntity> entity)
+        public virtual async Task InsertAsync(IEnumerable<TDtoEntity> dtoEntities)
         {
-            await _dbSet.AddRangeAsync(entity);
+            var entities = _mapper.Map<IEnumerable<TEntity>>(dtoEntities);
+            await _dbSet.AddRangeAsync(entities);
             await SaveChanges();
         }
+
+        #endregion
+
+        #region Delete
 
         public virtual async Task DeleteAsync(TKey id)
         {
@@ -88,40 +127,47 @@ namespace Portfolio.Core.Services.Common
             await SaveChanges();
         }
 
-        public async Task DeleteAsync(TEntity entity)
+        public async Task DeleteAsync(TDtoEntity dtoEntity)
+        {
+            var entity = _mapper.Map<TEntity>(dtoEntity);
+            _dbSet.Remove(entity);
+            await SaveChanges();
+        }
+
+        public async Task DeleteAsync(IEnumerable<TDtoEntity> dtoEntities)
+        {
+            var entities = _mapper.Map<IEnumerable<TEntity>>(dtoEntities);
+            _dbSet.RemoveRange(entities);
+            await SaveChanges();
+        }
+
+        private async Task DeleteAsync(TEntity entity)
         {
             _dbSet.Remove(entity);
             await SaveChanges();
         }
 
-        public async Task DeleteAsync(IEnumerable<TEntity> entities)
-        {
-            _dbSet.RemoveRange(entities);
-            await SaveChanges();
-        }
+        #endregion
 
-        public async Task UpdateAsync(TEntity entity)
+        #region Update
+
+        public async Task UpdateAsync(TDtoEntity dtoEntity)
         {
+            var entity = _mapper.Map<TEntity>(dtoEntity);
             _dbSet.Update(entity);
             await SaveChanges();
         }
 
-        public async Task UpdateRangeAsync(IEnumerable<TEntity> entities)
+        public async Task UpdateRangeAsync(IEnumerable<TDtoEntity> dtoEntities)
         {
+            var entities = _mapper.Map<IEnumerable<TEntity>>(dtoEntities);
             _dbSet.UpdateRange(entities);
             await SaveChanges();
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
-        {
-            IQueryable<TEntity> query = _dbSet;
-            return await query.AsNoTracking().ToListAsync();
-        }
+        #endregion
 
-        protected IQueryable<TEntity> QueryableAsync()
-        {
-            return _dbSet.AsQueryable();
-        }
+        #region Utils
 
         private async Task SaveChanges()
         {
@@ -133,10 +179,13 @@ namespace Portfolio.Core.Services.Common
             {
 
             }
-
         }
 
         public int Count()
             => _dbSet.Count();
+
+        #endregion
+
+        #endregion
     }
 }

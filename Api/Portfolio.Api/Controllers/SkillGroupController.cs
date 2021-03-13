@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Portfolio.Core.Interfaces;
 using Portfolio.Domain.Dtos;
 
 namespace Portfolio.Controllers
@@ -12,15 +14,17 @@ namespace Portfolio.Controllers
     {
         #region Fields
 
-        private readonly ILogger<SkillGroupController> _logger;
+        private ILogger<SkillGroupController> _logger;
+        private readonly ISkillGroupService _skillGroupService;
 
         #endregion
 
         #region Constructor
 
-        public SkillGroupController(ILogger<SkillGroupController> logger)
+        public SkillGroupController(ILogger<SkillGroupController> logger, ISkillGroupService skillGroupService)
         {
             _logger = logger;
+            _skillGroupService = skillGroupService;
         }
 
         #endregion
@@ -28,10 +32,49 @@ namespace Portfolio.Controllers
         #region Methods
 
         [HttpGet]
-        public IEnumerable<SkillGroupDto> Get()
+        public async Task<IEnumerable<SkillGroupDto>> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new SkillGroupDto())
-                .ToArray();
+            return await _skillGroupService.GetAll();
+        }
+ 
+        [HttpPost]
+        public async Task<IActionResult> Create(SkillGroupDto model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!await _skillGroupService.IsUniqueTitle(model.Title))
+                return BadRequest("There is already a skill group with the same title");
+
+            await _skillGroupService.Insert(model);
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(SkillGroupDto model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if(!await _skillGroupService.Exists(model.Id))
+                 return BadRequest($"No skill group for id: {model.Id} found");
+
+            if (!await _skillGroupService.IsUniqueTitle(model.Title, model.Id))
+                return BadRequest("There is already a skill group with the same title");
+
+            await _skillGroupService.Update(model);
+            return Ok();
+        }
+        
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            await _skillGroupService.Delete(id);
+
+            return Ok();
         }
 
         #endregion
