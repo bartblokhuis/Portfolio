@@ -72,6 +72,9 @@ namespace Portfolio.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            if (!await _skillGroupService.Exists(id))
+                return BadRequest($"No skill group for id: {id} found");
+
             await _skillGroupService.Delete(id);
 
             return Ok();
