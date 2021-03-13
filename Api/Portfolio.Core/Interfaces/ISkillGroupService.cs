@@ -17,7 +17,7 @@ namespace Portfolio.Core.Interfaces
 
         Task Delete(int id);
 
-        Task<bool> IsUniqueTitle(string title, int idToIgnore = 0);
+        Task<bool> IsExistingTitle(string title, int idToIgnore = 0);
 
         Task<bool> Exists(int id);
     }

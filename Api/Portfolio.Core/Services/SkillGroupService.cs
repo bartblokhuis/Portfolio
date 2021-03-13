@@ -35,11 +35,8 @@ namespace Portfolio.Core.Services
 
         public async Task<IEnumerable<SkillGroupDto>> GetAll()
         {
-            var skillGroups = await _skillGroupRepository.Table
-                .OrderByDescending(skillGroup => skillGroup.DisplayNumber).ToListAsync();
-
-            return _mapper.Map<IEnumerable<SkillGroupDto>>(skillGroups);
-
+            var skillGroups = await _skillGroupRepository.GetAsync(orderBy: (s) => s.OrderBy(x => x.DisplayNumber));
+            return skillGroups;
         }
 
         public async Task Insert(SkillGroupDto skillGroupDto)
@@ -57,7 +54,7 @@ namespace Portfolio.Core.Services
         {
             return _skillGroupRepository.UpdateRangeAsync(skillGroupsDto);
         }
-
+        
         public Task Delete(int id)
         {
             return _skillGroupRepository.DeleteAsync(id);
@@ -65,10 +62,10 @@ namespace Portfolio.Core.Services
 
         #region Utils
 
-        public Task<bool> IsUniqueTitle(string title, int idToIgnore = 0)
+        public Task<bool> IsExistingTitle(string title, int idToIgnore = 0)
         {
-            return _skillGroupRepository.Table.AllAsync(skillGroup => skillGroup.Title.ToLower() != title.ToLower()
-                        && skillGroup.Id != idToIgnore);
+            return _skillGroupRepository.Table.AnyAsync(skillGroup => skillGroup.Title.ToLower() == title.ToLower() 
+                    && (idToIgnore == 0 || skillGroup.Id == idToIgnore));
         }
 
         public Task<bool> Exists(int id)

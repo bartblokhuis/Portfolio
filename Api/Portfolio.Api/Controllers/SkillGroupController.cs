@@ -43,7 +43,7 @@ namespace Portfolio.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!await _skillGroupService.IsUniqueTitle(model.Title))
+            if (await _skillGroupService.IsExistingTitle(model.Title))
                 return BadRequest("There is already a skill group with the same title");
 
             await _skillGroupService.Insert(model);
@@ -59,7 +59,7 @@ namespace Portfolio.Controllers
             if(!await _skillGroupService.Exists(model.Id))
                  return BadRequest($"No skill group for id: {model.Id} found");
 
-            if (!await _skillGroupService.IsUniqueTitle(model.Title, model.Id))
+            if (await _skillGroupService.IsExistingTitle(model.Title, model.Id))
                 return BadRequest("There is already a skill group with the same title");
 
             await _skillGroupService.Update(model);
