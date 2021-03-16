@@ -11,7 +11,7 @@ using Portfolio.Core.Interfaces.Common;
 using Portfolio.Core.Services;
 using Portfolio.Core.Services.Common;
 using Portfolio.Database;
-using System.Linq;
+using Portfolio.Helpers;
 
 namespace Portfolio
 {
@@ -38,16 +38,17 @@ namespace Portfolio
             services.AddAutoMapper(typeof(PortfolioMappings));
 
             services.AddScoped<ISkillGroupService, SkillGroupService>();
+            services.AddScoped<ISkillService, SkillService>();
             services.AddScoped(typeof(IBaseRepository<,,,>), typeof(BaseRepository<,,,>));
             services.AddScoped(typeof(IBaseRepository<,,>), typeof(BaseRepository<,,>));
             services.AddScoped(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
+            services.AddSingleton<IUploadImageHelper, UploadImageHelper>();
 
             
 
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API WSVAP (WebSmartView)", Version = "v1" });
-               // c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); //This line
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "API WSVAP (WebSmartView)", Version = "v1" });
             });
         }
 
@@ -55,7 +56,9 @@ namespace Portfolio
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {app.UseDeveloperExceptionPage();
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1"));
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1");
+                } );
 
             if (env.IsDevelopment())
             {
