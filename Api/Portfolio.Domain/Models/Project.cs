@@ -1,4 +1,5 @@
 ﻿using Portfolio.Domain.Models.Common;
+using System.Collections.Generic;
 
 namespace Portfolio.Domain.Models
 {
@@ -19,6 +20,8 @@ namespace Portfolio.Domain.Models
         public string GithubUrl { get; set; }
 
         public int DisplayNumber { get; set; }
+
+        public ICollection<Skill> Skills { get; set; }
 
         #endregion
     }

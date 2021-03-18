@@ -1,4 +1,5 @@
 ﻿using Portfolio.Domain.Models.Common;
+using System.Collections.Generic;
 
 namespace Portfolio.Domain.Models
 {
@@ -15,6 +16,8 @@ namespace Portfolio.Domain.Models
         public int SkillGroupId { get; set; }
 
         public SkillGroup SkillGroup { get; set; }
+
+        public ICollection<Project> Skills { get; set; }
 
         #endregion
     }
