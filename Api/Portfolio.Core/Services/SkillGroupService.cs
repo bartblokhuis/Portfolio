@@ -17,16 +17,14 @@ namespace Portfolio.Core.Services
         #region Fields
 
         private readonly IBaseRepository<SkillGroup, SkillGroupDto> _skillGroupRepository;
-        private readonly IMapper _mapper;
 
         #endregion
 
         #region Constructor
 
-        public SkillGroupService(IBaseRepository<SkillGroup, SkillGroupDto> skillGroupRepository, IMapper mapper)
+        public SkillGroupService(IBaseRepository<SkillGroup, SkillGroupDto> skillGroupRepository)
         {
             _skillGroupRepository = skillGroupRepository;
-            _mapper = mapper;
         }
 
         #endregion

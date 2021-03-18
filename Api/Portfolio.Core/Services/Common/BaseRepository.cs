@@ -98,6 +98,15 @@ namespace Portfolio.Core.Services.Common
             return _mapper.Map<Task<IEnumerable<TDtoEntity>>>(result);
         }
 
+        public async Task<TDtoEntity> FirstOrDefaultAsync()
+        {
+            var firstItem = await _dbSet.FirstOrDefaultAsync();
+
+            return firstItem == null?
+                    default:
+                    _mapper.Map<TDtoEntity>(firstItem);
+        }
+
         #endregion
 
         #region Create

@@ -1,8 +1,6 @@
-﻿using Portfolio.Domain.Dtos.Common;
-
-namespace Portfolio.Domain.Dtos
+﻿namespace Portfolio.Domain.Dtos
 {
-    public class AboutMeDto : BaseDto
+    public class AboutMeDto
     {
         #region Properties
 

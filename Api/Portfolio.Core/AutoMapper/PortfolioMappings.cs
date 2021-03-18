@@ -9,7 +9,7 @@ namespace Portfolio.Core.AutoMapper
         public PortfolioMappings()
         {
             CreateMap<AboutMe, AboutMeDto>();
-            CreateMap<AboutMeDto, AboutMe>();
+            CreateMap<AboutMeDto, AboutMe>().ForMember(x => x.Id, options => options.Ignore());
 
             CreateMap<Message, MessageDto>();
             CreateMap<MessageDto, Message>();

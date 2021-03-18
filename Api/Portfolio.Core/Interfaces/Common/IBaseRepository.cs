@@ -48,5 +48,7 @@ namespace Portfolio.Core.Interfaces.Common
         Task<TEntityDto> GetByIdAsync(TKey id);
 
         int Count();
+
+        Task<TEntityDto> FirstOrDefaultAsync();
     }
 }

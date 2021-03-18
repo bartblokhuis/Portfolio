@@ -39,12 +39,11 @@ namespace Portfolio
 
             services.AddScoped<ISkillGroupService, SkillGroupService>();
             services.AddScoped<ISkillService, SkillService>();
+            services.AddScoped<IAboutMeService, AboutMeService>();
             services.AddScoped(typeof(IBaseRepository<,,,>), typeof(BaseRepository<,,,>));
             services.AddScoped(typeof(IBaseRepository<,,>), typeof(BaseRepository<,,>));
             services.AddScoped(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
             services.AddSingleton<IUploadImageHelper, UploadImageHelper>();
-
-            
 
             services.AddSwaggerGen(options =>
             {
