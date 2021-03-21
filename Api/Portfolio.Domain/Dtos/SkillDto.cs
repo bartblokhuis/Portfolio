@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Portfolio.Domain.Dtos.Common;
+using Portfolio.Domain.Dtos.Projects;
+using Portfolio.Domain.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -20,9 +22,11 @@ namespace Portfolio.Domain.Dtos
         [Required]
         public int SkillGroupId { get; set; }
 
+        public SkillGroup SkillGroup { get; set; }
+
         public IFormFile Icon { get; set; }
 
-        public ICollection<ProjectDto> Skills { get; set; }
+        public ICollection<ProjectDto> Projects { get; set; }
 
         #endregion
     }

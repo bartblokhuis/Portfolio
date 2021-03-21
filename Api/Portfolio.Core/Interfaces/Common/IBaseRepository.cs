@@ -31,11 +31,13 @@ namespace Portfolio.Core.Interfaces.Common
 
         Task<IEnumerable<TEntityDto>> GetAllAsync();
 
-        Task InsertAsync(TEntityDto entity);
+        Task<TEntityDto> InsertAsync(TEntityDto dtoEntity);
 
         Task InsertAsync(IEnumerable<TEntityDto> entity);
 
-        Task UpdateAsync(TEntityDto entity);
+        Task<TEntityDto> UpdateAsync(TEntityDto entity);
+
+        Task<TEntityDto> UpdateAsync(TEntity entity);
 
         Task UpdateRangeAsync(IEnumerable<TEntityDto> entities);
 

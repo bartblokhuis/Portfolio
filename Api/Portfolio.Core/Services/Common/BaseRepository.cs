@@ -30,12 +30,12 @@ namespace Portfolio.Core.Services.Common
     }
 
     public class BaseRepository<TEntity, TDtoEntity, TKey, TDbContext> : IBaseRepository<TEntity, TDtoEntity, TKey, TDbContext>
-        where TDbContext : DbContext
+        where TDbContext : PortfolioContext
         where TEntity : class, IBaseEntity<TKey>
     {
         #region Fields
 
-        private readonly DbContext _context;
+        private readonly PortfolioContext _context;
         private readonly DbSet<TEntity> _dbSet;
         private readonly IMapper _mapper;
         
@@ -71,7 +71,7 @@ namespace Portfolio.Core.Services.Common
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
         {
-            IQueryable<TEntity> query = _dbSet;
+            IQueryable<TEntity> query = _dbSet.AsNoTracking();
 
             if (filter != null)
                 query = query.Where(filter);
@@ -90,12 +90,12 @@ namespace Portfolio.Core.Services.Common
             return result == null ? default : _mapper.Map<IEnumerable<TDtoEntity>>(result);
         }
 
-        public virtual Task<IEnumerable<TDtoEntity>> GetAllAsync()
+        public virtual async Task<IEnumerable<TDtoEntity>> GetAllAsync()
         {
             IQueryable<TEntity> query = _dbSet;
-            var result = query.AsNoTracking().ToListAsync();
+            var result = await query.AsNoTracking().ToListAsync();
 
-            return _mapper.Map<Task<IEnumerable<TDtoEntity>>>(result);
+            return _mapper.Map<IEnumerable<TDtoEntity>>(result);
         }
 
         public async Task<TDtoEntity> FirstOrDefaultAsync()
@@ -111,11 +111,13 @@ namespace Portfolio.Core.Services.Common
 
         #region Create
 
-        public async Task InsertAsync(TDtoEntity dtoEntity)
+        public async Task<TDtoEntity> InsertAsync(TDtoEntity dtoEntity)
         {
             var entity = _mapper.Map<TEntity>(dtoEntity);
             await _dbSet.AddAsync(entity);
             await SaveChanges();
+
+            return _mapper.Map<TDtoEntity>(entity);
         }
 
         public virtual async Task InsertAsync(IEnumerable<TDtoEntity> dtoEntities)
@@ -160,12 +162,22 @@ namespace Portfolio.Core.Services.Common
 
         #region Update
 
-        public async Task UpdateAsync(TDtoEntity dtoEntity)
+        public Task<TDtoEntity> UpdateAsync(TDtoEntity dtoEntity)
         {
-            var entity = _mapper.Map<TEntity>(dtoEntity);
+            var entity = (TEntity)Activator.CreateInstance(typeof(TEntity), new object[] {  });
+
+            _mapper.Map(dtoEntity, entity);
+            return UpdateAsync(entity);
+        }
+
+        public async Task<TDtoEntity> UpdateAsync(TEntity entity)
+        {
             _dbSet.Update(entity);
             await SaveChanges();
+
+            return _mapper.Map<TDtoEntity>(entity);
         }
+
 
         public async Task UpdateRangeAsync(IEnumerable<TDtoEntity> dtoEntities)
         {
@@ -186,7 +198,7 @@ namespace Portfolio.Core.Services.Common
             }
             catch (Exception e)
             {
-
+                
             }
         }
 

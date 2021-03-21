@@ -17,7 +17,7 @@ namespace Portfolio.Domain.Models
 
         public SkillGroup SkillGroup { get; set; }
 
-        public ICollection<Project> Skills { get; set; }
+        public ICollection<Project> Projects { get; set; }
 
         #endregion
     }

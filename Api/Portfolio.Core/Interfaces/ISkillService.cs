@@ -17,5 +17,7 @@ namespace Portfolio.Core.Interfaces
         Task<bool> Exists(int id);
 
         Task<bool> IsExistingSkill(string name, int skillGroup, int idToIgnore = 0);
+
+        Task<IEnumerable<SkillDto>> GetSkillsByIds(IEnumerable<int> ids);
     }
 }

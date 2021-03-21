@@ -66,6 +66,18 @@ namespace Portfolio.Database
 
         #region Utils
 
+        public void DetachAllEntities()
+        {
+            var changedEntriesCopy = this.ChangeTracker.Entries()
+                .Where(e => e.State == EntityState.Added ||
+                            e.State == EntityState.Modified ||
+                            e.State == EntityState.Deleted)
+                .ToList();
+
+            foreach (var entry in changedEntriesCopy)
+                entry.State = EntityState.Detached;
+        }
+
         private static bool HasUpdatedTime<TEntity>(TEntity entity)
         {
             var entityType = entity.GetType();

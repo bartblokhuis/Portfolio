@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Portfolio.Domain.Dtos;
+using Portfolio.Domain.Dtos.Projects;
 using Portfolio.Domain.Models;
 
 namespace Portfolio.Core.AutoMapper
@@ -16,6 +17,8 @@ namespace Portfolio.Core.AutoMapper
 
             CreateMap<Project, ProjectDto>();
             CreateMap<ProjectDto, Project>();
+
+            CreateMap<CreateUpdateProject, ProjectDto>();
 
             CreateMap<Skill, SkillDto>();
             CreateMap<SkillDto, Skill>();

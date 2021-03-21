@@ -1,10 +1,9 @@
 ﻿using Portfolio.Domain.Dtos.Common;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
-namespace Portfolio.Domain.Dtos
+namespace Portfolio.Domain.Dtos.Projects
 {
-    public class ProjectDto : BaseDto
+    public class CreateUpdateProject : BaseDto
     {
         #region Properties
 
@@ -21,8 +20,6 @@ namespace Portfolio.Domain.Dtos
         public string GithubUrl { get; set; }
 
         public int DisplayNumber { get; set; }
-
-        public ICollection<SkillDto> Skills { get; set; }
 
         #endregion
     }

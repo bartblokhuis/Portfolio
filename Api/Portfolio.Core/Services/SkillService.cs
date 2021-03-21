@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Portfolio.Core.Interfaces;
 using Portfolio.Core.Interfaces.Common;
@@ -14,14 +15,16 @@ namespace Portfolio.Core.Services
         #region Fields
 
         private readonly IBaseRepository<Skill, SkillDto> _skillRepository;
+        private readonly IMapper _mapper;
 
         #endregion
 
         #region Constructor
 
-        public SkillService(IBaseRepository<Skill, SkillDto> skillRepository)
+        public SkillService(IBaseRepository<Skill, SkillDto> skillRepository, IMapper mapper)
         {
             _skillRepository = skillRepository;
+            _mapper = mapper;
         }
 
         #endregion
@@ -46,6 +49,12 @@ namespace Portfolio.Core.Services
         public Task Update(SkillDto skillDto)
         {
             return _skillRepository.UpdateAsync(skillDto);
+        }
+
+        public async Task<IEnumerable<SkillDto>> GetSkillsByIds(IEnumerable<int> ids)
+        {
+            var skills = await _skillRepository.GetAsync(filter: (s) => ids.Contains(s.Id));
+            return _mapper.Map<IEnumerable<SkillDto>>(skills);
         }
 
         #region Utils
